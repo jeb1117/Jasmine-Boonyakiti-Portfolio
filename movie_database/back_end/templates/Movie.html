@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width">
+	<title>Recent Movies</title>
+
+
+  <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<link href="../style/cover.css" rel="stylesheet">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    $(function(){
+      $('#searchBt').click(function(evt){
+        evt.preventDefault();
+        var data = { name : $("#mySearch").val(), type : $("#typeSelector").val()
+        }
+        $.get('http://localhost:3000/generalRequest', data, /*contentType = 'application/x-www-form-urlencoded; charset=UTF-8', dataType = 'json'*/  function(data) {
+						$("#title1").empty();
+						$(".subtitle").hide();
+						$("#sub1").empty();
+						$("#description").empty();
+						$("#topper").empty();
+						$("#tablebody").empty();
+						$("#topper2").empty();
+						$("#reviewbody").empty();
+						$("#rate").empty();
+						$("#pic").empty();
+								if($("#typeSelector").val() == "movie"){
+									$("#title1").append(data[0][0]['name']);
+									$(".subtitle").show();
+									$("#sub1").append(data[0][0]['run_time'] + " minutes <span class=ghost>|</span>" + " Released: "+ data[0][0]['release_date'].substring(0,10) + " <span class=ghost>|</span> Directed By "+ data[3][0]['fname']+ " " + data[3][0]['lname']);
+									$("#description").append(data[2][0]['avg(rating)'] + "/5 Potatoes");
+									$("#topper").append("<th>Actors: </th>");
+									var picture = data[0][0]['name'].replace(/ |:|\'/g, '')
+
+									$("#pic").append('<img src="'+picture+'" width="150" height="250">')
+									for (i = 0; i < data[1].length; i++){
+										$("#tablebody").append("<tr><td>" + data[1][i]['fname'] + " " + data[1][i]['lname'] + "</tr></td>")
+									}
+									$("#topper2").append("<th>Rating: </th> <th>Review:</th>");
+									for (i = 0; i < data[4].length; i++){
+										$("#reviewbody").append("<tr><td>" + data[4][i]['rating'] + "</td> <td> " + data[4][i]['description'] + "</tr></td>")
+									}
+                //$(".lead2").append(JSON.stringify(movies)); // show the list
+								}
+								else if ($("#typeSelector").val() == "director"){
+									$("#title1").append(data[0][0]['fname'] + " " + data[0][0]['lname']);
+									$("#description").append(data[0][0]['bio']);
+									$("#topper").append("<th>Has Directed:</th>");
+									for (i = 0; i < data[1].length; i++){
+										$("#tablebody").append("<tr><td>" + data[1][i]['name'] + "</tr></td>")
+									}
+								}
+								else{
+									$("#title1").append(data[0][0]['fname'] + " " + data[0][0]['lname']);
+									$("#description").append(data[0][0]['bio']);
+									$("#rate").append('Actor Rated: ' + data[0][0]['rate'] + ' Potatoes');
+									var picture = (data[0][0]['fname'] + data[0][0]['lname']).replace(/ |:|\'/g, '')
+									$("#pic").append('<img src="'+picture+'" width="150" height="250">')
+									$("#topper").append("<th>Has Acted In:</th>");
+									for (i = 0; i < data[1].length; i++){
+										$("#tablebody").append("<tr><td>" + data[1][i]['name'] + "</tr></td>")
+									}
+								}
+            });
+      });
+    });
+
+  </script>
+</head>
+<body >
+
+	<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead-clearfix">
+
+            <div class="inner">
+
+							<nav class="navbar navbar-inverse">
+								<a href="#" class="navbar-left"><img src="/freshpotatoes" width="100" height="100"></a>
+							<div class="container-fluid">
+
+								<ul class="nav navbar-nav">
+									<li class="active"><a href="/">Home</a></li>
+									<li><a href="/review">Leave a Review</a></li>
+									<li><a href="/ticket">Buy a Ticket</a></li>
+									<li><a href="/manLogin">Moderator Login</a></li>
+									<!-- <li><a href="#">Page 3</a></li> -->
+								</ul>
+							</div>
+						</nav>
+            </div>
+          </div>
+        <div style="width:690px;height:650px;overflow:auto;padding:5px;">
+
+		<div class="bigDiv">
+          <div class="inner-cover">
+            <h2 class="cover-heading">Search Potatoes Database</h2>
+            	<br>
+						<form>
+						 <!--Search Bar with drop down menu-->
+						 <div class="input-append">
+							 <input type="text" id="mySearch" class="form-control" placeholder="Search" required/>
+							 <br>
+							 <select class="form-control" id="typeSelector">
+							  <option value="movie">Movie</option>
+							   <option value="director">Director</option>
+							  <option value="actor">Actor/Actress</option>
+							</select>
+							<br>
+							<button type="button" class="btn btn-primary" id="searchBt">Search</button>
+						 </div>
+					 </form>
+
+					 <!-- Table to put search results in -->
+					 <div class="scrollable">
+						 <div style="width: 100%; overflow: hidden;">
+						 <div id='pic' style="width: 200px; float: left;">
+						 </div>
+
+						 <div class="title_wrapper" style="margin-left: 50px; margin_top: 50px;">
+							 <h1 id='title1' align="left"></h1>
+							 <div class="subtitle" style="display: none;" align="left">
+								 <p id="sub1"></p>
+							 </div>
+							 <p id="description" align="left"></p>
+							 <br>
+							 <p id="rate" align="left"></p>
+						 </div>
+						 </div>
+							<table class="table" align= "left" id="table1">
+						    <thead>
+						      <tr id="topper">
+						      </tr>
+						    </thead>
+						    <tbody id ="tablebody">
+						    </tbody>
+						  </table>
+							<br>
+							<table class="table" align= "left" id="table2">
+								<thead>
+									<tr id="topper2">
+
+									</tr>
+								</thead>
+								<tbody id ="reviewbody">
+								</tbody>
+							</table>
+						</div>
+          </div>
+					</div>
+		</div>
+
+
+          <div class="mastfoot">
+
+            <div class="inner">
+              <p><!-- Fresh potatoes -->
+
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+</body>
+</html>

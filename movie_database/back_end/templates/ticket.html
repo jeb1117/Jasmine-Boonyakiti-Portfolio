@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width">
+	<title>Recent Movies</title>
+
+
+  <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<link href="../style/cover.css" rel="stylesheet">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+    $(function GenerateMovies() {
+				$.get('http://localhost:3000/getMovies', function(res) {
+								for (i = 0; i < res.length; i++){
+									$("#movieList").append("<option value=\"" + res[i]['movie_id'] + "\">" + res[i]['name'] + "</option>");
+								}
+            });
+    });
+
+  </script>
+
+	<script type="text/javascript">
+    $(function() {
+			$('#subMov').click(function(evt){
+					$("#DayTimeSelect").empty();
+					$("#BuyMovie").show();
+					var data = { movie_id : $("#movieList").find(":selected").val() }
+					$.get('http://localhost:3000/getShowtimes', data, function(res) {
+									for (i = 0; i < res.length; i++){
+										$("#DayTimeSelect").append("<option value=\"" + res[i]['show_date'].substring(0,10) + res[i]['show_time'] + "\">" + res[i]['show_date'].substring(0,10) + " at " + res[i]['show_time'] + "</option>");
+									}
+	            });
+
+					//window.location.replace("/movieticket" + '#' + $("#movieList").find(":selected").val());
+
+				});
+
+    });
+
+  </script>
+
+	<script type="text/javascript">
+		$(function() {
+				$('#BuyTicketBtn').click(function(evt){
+				window.location.replace("/movieticket?movie=" + $("#movieList").find(":selected").val() + '&date=' + $("#DayTimeSelect").find(":selected").val().substring(0,10) + '&time=' + $("#DayTimeSelect").find(":selected").val().substring(10));
+			});
+		});
+
+	</script>
+
+</head>
+<body>
+	<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <nav class="navbar navbar-inverse">
+                <a href="#" class="navbar-left"><img src="/freshpotatoes" width="100" height="100"></a>
+							 <div class="container-fluid">
+
+								 <ul class="nav navbar-nav">
+									 <!-- <li class="active"><a href="/">Home</a></li> -->
+									 <li><a href="/">Home</a></li>
+									 <li><a href="/review">Leave a Review</a></li>
+									 <li class="active"><a href="/ticket">Buy a Ticket</a></li>
+									 <li><a href="/manLogin">Moderator Login</a></li>
+									 <!-- <li><a href="#">Page 3</a></li> -->
+								 </ul>
+							 </div>
+						 </nav>
+            </div>
+
+
+          <div class="inner-cover">
+
+          </div>
+					<form>
+
+				 </form>
+
+          <div class="inner cover">
+
+            <h2 class="cover-heading">What Movie Would You Like to See?</h2>
+
+              <form>
+                <div class="input-append">
+   							 <select id='movieList' class="form-control" required>
+   							</select>
+   						 </div>
+             </form>
+             <br>
+
+              <form>
+             <!--Search Bar with drop down menu
+                <div class="time-select">
+                 <select class="form-control" required>
+                  <option value="opt1">02:30:00</option>
+                  <option value="opt2">05:50:00</option>
+                  <option value="opt3">06:00:00</option>
+                  <option value="opt4">10:40:00</option>
+                  <option value="opt5">12:30:00</option>
+                  <option value="opt6">09:15:00</option>
+                  <option value="opt7">11:45:00</option>
+
+                </select>
+            <div class = "label-date">
+                <label for="movie">Choose date:</label>
+            </div>
+             <div class="input-append">
+              <form>
+                <div>
+                  <input type="date" id="movie" name="movie">
+                </div>
+              </form
+
+             </div>
+           </form>
+-->
+							<button type="button" class="btn btn-primary" id="subMov">Submit</button>
+<!--
+							<div style="width: 100%; overflow: hidden;">
+    <div style="width: 0px; float: left;"> Left </div>
+    <div style="margin-left: 0px;"> Right </div>
+</div> -->
+              <!-- onclick="window.location.href='/movieticket'" -->
+
+
+          </div>
+					<div id='BuyMovie' style="display: none;">
+						<h3>Select a showtime</h3>
+						<select class="form-control" id='DayTimeSelect'>
+					 </select>
+					 <button type="button" class="btn btn-primary" id="BuyTicketBtn">Buy Ticket</button>
+					</div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Fresh potatoes
+
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+</body>
+</html>

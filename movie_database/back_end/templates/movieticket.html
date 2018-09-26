@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width">
+	<title>Recent Movies</title>
+
+
+  <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<link href="../style/cover.css" rel="stylesheet">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+    $(function() {
+			$('#subMov').click(function(evt){
+				evt.preventDefault();
+			var params = window.location.search.substring(1).split("&")
+			var data = { movie : params[0].replace('%20', ' ').substring(6), date: params[1].replace('%20', ' ').substring(5), time : params[2].replace('%20', ' ').substring(5),
+			fname : $("#fname").val(), lname : $("#lname").val(),
+			cc : $("#CardNum").val() };
+			console.log(data);
+			console.log($("#cardNum").val())
+			$.get('http://localhost:3000/BuyTicket', data, function(res) {
+					console.log(res)
+					alert("Ticket Purchased, email confirmation will be sent");
+					window.location.replace("/");
+			});
+    });
+		});
+
+  </script>
+</head>
+<body>
+	<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+
+            <div class="inner">
+							<nav class="navbar navbar-inverse">
+								<a href="#" class="navbar-left"><img src="/freshpotatoes" width="100" height="100"></a>
+							<div class="container-fluid">
+								<div class="navbar-header">
+								</div>
+
+								<ul class="nav navbar-nav">
+									<li><a href="/">Home</a></li>
+                  <li><a href="/review">Leave a Review</a></li>
+                  <li><a href="/ticket">Buy a Ticket</a></li>
+                  <li><a href="/manLogin">Moderator Login</a></li>
+								</ul>
+							</div>
+						</nav>
+            </div>
+
+          <div class="inner-cover" id="insertTab">
+            <h2 align ="center" class="cover-heading">Billing Information</h2>
+            <br><br>
+          <form align = "left">
+						<label for="Fname">First Name</label><br>
+						<input type="text" id="fname" class="form-control" placeholder="Input First Name" required/>
+						<br>
+						<label for="Lname">Last Name</label>
+            <input type="text" id="lname" class="form-control" placeholder="Input Last Name" required/>
+						<br>
+            <label for="cardNum">Card Number</label>
+            <input type="number" id="CardNum" class="form-control" placeholder="xxxx-xxxx-xxxx-1234" />
+            <br>
+           <div class="CVV">
+                <label for="cvv">CVV</label>
+                <input type="text" class="form-control" id="cvv" placeholder="xxx">
+            </div>
+            <br>
+            <label>Expiration Date</label>
+           <div class="form-group" id="expiration-date" >
+                <select>
+                    <option value="01">January</option>
+                    <option value="02">February </option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <select>
+                    <option value="17"> 2017</option>
+                    <option value="18"> 2018</option>
+                    <option value="19"> 2019</option>
+                    <option value="20"> 2020</option>
+                    <option value="21"> 2021</option>
+                    <option value="22"> 2022</option>
+                </select>
+
+						</div>
+            <br>
+            <label for="RewardNum">Reward Number (If applicable)</label>
+            <input type="number" id="RewardNum" class="form-control" placeholder="1234" />
+          </form>
+            <br><br>
+            <button type="button" class="btn btn-primary" id="subMov"> Submit</button>
+          </div>
+          <div class="mastfoot">
+            <!--<div class="inner">
+              <p>Fresh potatoes
+
+              </p>
+            </div> -->
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+</body>
+</html>

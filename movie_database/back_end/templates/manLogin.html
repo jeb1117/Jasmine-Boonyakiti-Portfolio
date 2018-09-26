@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width">
+  <title>Recent Movies</title>
+
+
+  <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="../style/cover.css" rel="stylesheet">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(function(){
+    $('#login').click(function(evt){
+
+      evt.preventDefault();
+      var data = {username : $("#username").val(), password : $("#password").val()};
+      $.get('http://localhost:3000/credentials', data, function(req, res) {
+          if(req == "Success"){
+              $("#peasant").hide();
+              $("#manager").show();
+          }else{
+            alert("Sorry. Username or Password is incorrect.");
+          }
+        });
+    })
+  });
+
+  $(function GenerateMovies() {
+    $.get('http://localhost:3000/getMovies', function(res) {
+      for (i = 0; i < res.length; i++){
+        $("#reviewOpts").append("<option value=\"" + res[i]['name'] + "\">" + res[i]['name'] + "</option>");
+      }
+    });
+  });
+
+  $(function(){
+    $('#reviewOpts').click(function(evt){
+      evt.preventDefault();
+      var data = {movie: $('#reviewOpts').val()}
+      $.get('http://localhost:3000/retrieveReviews', data, function(res) {
+        $("#topper").empty();
+        $("#tablebody").empty();
+        $("#description").empty();
+        $("#topper").append("<th>ID: </th> <th>Review:</th>");
+        for (i = 0; i < res.length; i++){
+          $("#tablebody").append("<tr><td>" + res[i]['review_id'] + "</td> <td> " + res[i]['description'] + "</tr></td>")
+        }
+        $("#deletionDiv").show();
+      });
+    });
+  });
+
+  $(function(){
+    $('#delButton').click(function(evt){
+      evt.preventDefault();
+      var data = {id: $('#deleteId').val()}
+      $.get('http://localhost:3000/deleteReview', data, function(res) {
+        if(res.affectedRows == 1){
+          alert("Review was successfully deleted.");
+        }
+        else{
+          alert("Failed to delete review. No such review with id: " + data.id + " exists for this movie.");
+        }
+      });
+    });
+  });
+
+  function openTab(evt, tab) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tab-pane");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tab).style.display = "block";
+    evt.currentTarget.className += " active";
+};
+
+</script>
+
+</head>
+<body>
+  <div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+      <div class="cover-container">
+
+        <div class="masthead clearfix">
+
+          <div class="inner">
+
+            <nav class="navbar navbar-inverse">
+              <a href="#" class="navbar-left"><img src="/freshpotatoes" width="100" height="100"></a>
+              <div class="container-fluid">
+                <div class="navbar-header">
+                </div>
+                <ul class="nav navbar-nav">
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/review">Leave a Review</a></li>
+                  <li><a href="/ticket">Buy a Ticket</a></li>
+                  <li class="active"><a href="/manLogin">Moderator Login</a></li>
+                  <!-- <li><a href="#">Page 3</a></li> -->
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+
+        <div class="inner-cover">
+            <br>
+            <style type="text/css">
+            textarea.html-text-box {background-color:#ffffff;background-image:url(http://);background-repeat:no-repeat;background-attachment:fixed;border-width:1;border-style:solid;border-color:#cccccc;font-family:Arial;font-size:12pt;color:#000000;}
+            input.html-text-box {background-color:#ffffff;font-family:Arial;font-size:12pt;color:#000000;}
+            </style>
+            <div class="wrapper" id="peasant">
+              <form class="form-signin" id="managerForm">
+                <h2 class="form-signin-heading">Please login</h2>
+                <input type="text" class="form-control" id="username" placeholder="Username" required="" autofocus="" />
+                <br>
+                <input type="password" class="form-control" id="password" placeholder="Password" required=""/>
+                <br><br>
+                <button id="login" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+              </form>
+            </div>
+            <div class="wrapper" id="manager" hidden>
+              <h2>Admin View: Select Movie to Audit Reviews For</h2>
+              <div class="input_append">
+                <select class="form-control" id="reviewOpts"></select>
+                <!-- Table to put search results in -->
+     					 <div class="scrollable">
+     						 <div class="title_wrapper">
+     							 <h1 id='title1'></h1>
+     							 <div class="subtitle" style="display: none;">
+     								 <p id="sub1"></p>
+     							 </div>
+     							 <p id="description"></p>
+     						 </div>
+     							<table class="table" align= "left" id="table2">
+     								<thead>
+     									<tr id="topper">
+     									</tr>
+     								</thead>
+     								<tbody id ="tablebody">
+     								</tbody>
+     							</table>
+     						</div>
+              </div>
+              <div id="deletionDiv" hidden>
+                <label for="delete">ID of Review to Delete:</label>
+                <input class="form-control" type="number" id="deleteId" name="delete" required>
+                <button type="button" class="btn btn-primary" id="delButton">DELETE</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="mastfoot">
+
+            <div class="inner">
+              <p>Fresh potatoes
+
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </body>
+  </html>
