@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+
+<p> </p>
+<button id = "Button1">Increase Z</button>
+<button id = "Button2">Decrease Z</button>
+<button id = "Button3">Increase R</button>
+<button id = "Button4">Decrease R</button>
+
+<p> </p>
+<button id = "Button5">Increase theta</button>
+<button id = "Button6">Decrease theta</button>
+<button id = "Button7">Increase phi</button>
+<button id = "Button8">Decrease phi</button>
+<p> </p>
+<button id = "Button9">Wider</button>
+<button id = "Button10">Narrower</button>
+<button id = "Button11">Higher</button>
+<button id = "Button12">Shorter</button>
+<p></p>
+<input id= "input1" /><button id="row">Number of Rows</button>
+<input id= "input2" /><button id="column">Number of Columns</button>
+<select id = "menu1">
+    <option value="0">Surface</option>
+    <option value="1">Mesh</option>
+</select>
+<select id = "menu2">
+        <option value="0">Spring</option>
+        <option value="1">Summer</option>
+        <option value="2">Autumn</option>
+        <option value="3">Winter</option>
+        <!-- add your code here to add Summer, Autumn, Winter -->
+
+    </select>
+
+<p> </p>
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute  vec4 vPosition;
+
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+
+attribute  vec4 vColor;
+varying vec4 fColor;
+
+void main() 
+{
+    gl_Position = projectionMatrix*modelViewMatrix*vPosition;
+    fColor = vColor;
+} 
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+varying vec4 fColor;
+// add "uniform int colorFlag;" here.
+uniform int colorFlag;
+
+void
+main()
+{
+    // use if-else on the condition of colorFlag to switch colors.
+    
+    // black color for the grid over surface. 
+    if(colorFlag == 1)
+    {
+    	gl_FragColor = vec4(0.0, 00, 0.0, 1.0);
+    }
+    else
+    {
+    	gl_FragColor = fColor;
+    }
+}
+</script>
+
+<script type="text/javascript" src="../Lab6/webgl-utils.js"></script>
+<script type="text/javascript" src="../Lab6/initShaders.js"></script>
+<script type="text/javascript" src="../Lab6/MV.js"></script>
+<script type="text/javascript" src="sphere_color.js"></script>
+
+<body>
+
+
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+
+
+
+</body>
+</html>
