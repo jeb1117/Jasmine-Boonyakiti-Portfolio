@@ -16,6 +16,7 @@ This project represents the Computer Science program goals because we had to und
 
 <h1><b>4. Shaded Sphere </b></h1>
 
+![](Shaded_Sphere.png)
 
 <h1><b>5. </b></h1>
 
