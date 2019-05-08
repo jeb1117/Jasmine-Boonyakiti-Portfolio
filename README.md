@@ -1,6 +1,6 @@
 # Jasmine Boonyakiti Portfolio
 
-<h1><b>1. Flags 300</b></h1>
+<h1><b>1. [Flags 300](https://github.com/jeb1117/Jasmine-Boonyakiti-Portfolio/tree/master/Flags300)</b></h1>
 
 I worked on this project for my Introduction to Data Mining (CMPT 300B) class at Westminster College. This final project consisted of working with Python to create graphical visualizations of the Flag data that we had collected. We ran a couple models (Decision Tree, Gradient Boost, SVM, Random Forest, and K-Nearest Neighbor) to see what was the best model for our data, and 5 visualizations (Bokeh, Plotly, Matplotlib, and Seaborn). Since there were groups of 2-4 people, we had to rely on one another for each part that they would contribute. The significance of this project had helped with collaboration amongst peers with a project that had little guidance on how to turn our flag data into useful information. 
 
