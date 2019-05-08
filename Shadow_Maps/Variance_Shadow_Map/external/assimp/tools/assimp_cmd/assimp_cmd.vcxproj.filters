@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\jboon\OneDrive\Documents\Visual Studio 2017\Projects\Variance_Shadow_Map\external\assimp\tools\assimp_cmd\CompareDump.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jboon\OneDrive\Documents\Visual Studio 2017\Projects\Variance_Shadow_Map\external\assimp\tools\assimp_cmd\ImageExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jboon\OneDrive\Documents\Visual Studio 2017\Projects\Variance_Shadow_Map\external\assimp\tools\assimp_cmd\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jboon\OneDrive\Documents\Visual Studio 2017\Projects\Variance_Shadow_Map\external\assimp\tools\assimp_cmd\WriteDumb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jboon\OneDrive\Documents\Visual Studio 2017\Projects\Variance_Shadow_Map\external\assimp\tools\assimp_cmd\Info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jboon\OneDrive\Documents\Visual Studio 2017\Projects\Variance_Shadow_Map\external\assimp\tools\assimp_cmd\Export.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\jboon\OneDrive\Documents\Visual Studio 2017\Projects\Variance_Shadow_Map\external\assimp\tools\assimp_cmd\Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jboon\OneDrive\Documents\Visual Studio 2017\Projects\Variance_Shadow_Map\external\assimp\tools\assimp_cmd\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\jboon\OneDrive\Documents\Visual Studio 2017\Projects\Variance_Shadow_Map\external\assimp\tools\assimp_cmd\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\Users\jboon\OneDrive\Documents\Visual Studio 2017\Projects\Variance_Shadow_Map\external\assimp\tools\assimp_cmd\assimp_cmd.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{733D0790-EE9B-3768-8927-5A67C3FBCCFD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{148687B8-C546-370C-B82C-EF4761B3B2EF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
