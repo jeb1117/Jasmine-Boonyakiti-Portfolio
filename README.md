@@ -1,6 +1,6 @@
 # Jasmine Boonyakiti Portfolio
 
-### 1. [Flags 300](https://github.com/jeb1117/Jasmine-Boonyakiti-Portfolio/tree/master/Flags300)</h1>
+### 1. [Flags 300](https://github.com/jeb1117/Jasmine-Boonyakiti-Portfolio/tree/master/Flags300)
 
 **Computer Science Learning Goals:**
 - Aquire significant project experience working both individually and in a group setting (group project)
