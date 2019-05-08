@@ -75,7 +75,7 @@ I worked on this project for my Operating Systems (CMPT 351) class at Westminste
 I chose to include this project because I feel that this project reflects the Computer Science Learning Goals by having us develop our effective problem solving skills. This project focuses on multithreading and knowing when to lock and unlock each thread for the next "student" to be helped by the TA. After working on this project, I had a better understanding of how mutex locks work and how to get it to work with a queue properly. 
 
 
-### 6. Final Project
+### 6. [Final Project](https://github.com/jeb1117/Jasmine-Boonyakiti-Portfolio/tree/master/Shadow_Maps)
 
 **Computer Science Learning Goals:**
 - Attain system level understanding of the computer
